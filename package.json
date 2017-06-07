@@ -1,0 +1,35 @@
+{
+  "name": "asteroid-man-2.0",
+  "version": "1.0.0",
+  "description": "2D \"Fall Down\" game written with JavaScript with iOS / Android mobile browsers as well as standard desktop browsers.  Play game [here] (http://david-wolgemuth.github.io/asteroid-man).",
+  "main": "asteroid-man.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/david-wolgemuth/asteroid-man.git"
+  },
+  "keywords": [],
+  "author": "David Wolgemuth <davidjwolgemuth@gmail.com> (https://github.com/david-wolgemuth)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/david-wolgemuth/asteroid-man/issues"
+  },
+  "homepage": "https://github.com/david-wolgemuth/asteroid-man#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "concurrently": "^3.4.0",
+    "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4"
+  }
+}
