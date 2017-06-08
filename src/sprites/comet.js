@@ -1,5 +1,5 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { Explosion } from './explosion';
 import { randomBool, randomRange } from '../random';
 
@@ -7,7 +7,7 @@ export const COMET_VELOCITY = -0.2,
       MIN_COMET_X_VELOCITY = 2,
       MAX_COMET_X_VELOCITY = 6;
 
-export class Comet extends InteractiveSprite
+export class Comet extends Sprite
 {
   constructor (x, y, width)
   {
@@ -34,8 +34,8 @@ export class Comet extends InteractiveSprite
       new Explosion(this.x, this.y, this.width * 2)
     );
   }
-  render ()
+  render (canvas)
   {
-      super.render(this.x - this.width * 1.5, this.y + (this.height / 2), this.width * 11.8 * 2.2, this.height * 2.2);  // What are these numbers?
+      super.render(canvas, this.x - this.width * 1.5, this.y + (this.height / 2), this.width * 11.8 * 2.2, this.height * 2.2);  // What are these numbers?
   }
 }

@@ -1,5 +1,5 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { Explosion } from './explosion';
 import { Debree } from './debree';
 import { WINDOW_HEIGHT } from '../constants';
@@ -9,7 +9,7 @@ export const ASTEROID_MAX_X = 2,
       ASTEROID_ROTATION_SPEED = 3,
       ASTEROID_CUSHION = 0.7;
 
-export class Asteroid extends InteractiveSprite
+export class Asteroid extends Sprite
 {
   constructor (x, width)
   {
@@ -34,9 +34,9 @@ export class Asteroid extends InteractiveSprite
       ))
     );
   }
-  render ()
+  render (canvas)
   {
     const c = this.width * ASTEROID_CUSHION;
-    super.render(this.x-c, this.y-c, this.w + (c * 2), this.h + (c * 2));
+    super.render(canvas, this.x-c, this.y-c, this.w + (c * 2), this.h + (c * 2));
   }
 }

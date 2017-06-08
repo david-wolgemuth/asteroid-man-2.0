@@ -4,6 +4,14 @@ export const WINDOW_WIDTH = 345,
     WINDOW_HEIGHT =  500,
     RATIO = WIDTH / WINDOW_HEIGHT;
 
+// Layers
+
+export const BACKGROUND_LAYER = 0,
+    TEXT_LAYER = 1,
+    PLATFORM_LAYER = 2,
+    ITEM_LAYER = 3,
+    PLAYER_LAYER = 4;
+
 // Player
 export const FALLING_IMAGE_SWITCH = 0.1,
     PLAYER_W = 20,

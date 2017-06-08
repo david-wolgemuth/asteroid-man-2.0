@@ -1,11 +1,11 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { WINDOW_HEIGHT } from '../constants';
 
 export const COIN_R = 25,
       COIN_SPIN_RATE = 0.1;
 
-export class Coin extends InteractiveSprite
+export class Coin extends Sprite
 {
   constructor (x)
   {

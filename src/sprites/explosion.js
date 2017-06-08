@@ -1,7 +1,7 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 
-export class Explosion extends InteractiveSprite
+export class Explosion extends Sprite
 {
   constructor (x, y, width)
   {

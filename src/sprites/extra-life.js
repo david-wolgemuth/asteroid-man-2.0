@@ -1,15 +1,15 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { WINDOW_HEIGHT, PLAYER_W, PLAYER_H } from '../constants';
 
-export class ExtraLife extends InteractiveSprite
+export class ExtraLife extends Sprite
 {
   constructor (x)
   {
     super(x, WINDOW_HEIGHT, PLAYER_W, PLAYER_H);
   }
-  render ()
+  render (canvas)
   {
-    super.render(this.x, this.y, this.width * 1.5, this.height);
+    super.render(canvas, this.x, this.y, this.width * 1.5, this.height);
   }
 }

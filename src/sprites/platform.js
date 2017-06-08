@@ -1,5 +1,5 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { randomRange } from '../random';
 import { WINDOW_HEIGHT } from '../constants';
 
@@ -7,7 +7,7 @@ const PLATFORM_W = 5,
       MIN_PLATFORM_HEIGHT = 80,
       MAX_PLATFORM_HEIGHT = 320;
 
-export class Platform extends InteractiveSprite
+export class Platform extends Sprite
 {
   constructor (x)
   {

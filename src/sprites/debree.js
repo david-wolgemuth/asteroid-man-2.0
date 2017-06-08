@@ -1,12 +1,12 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { randomRange } from '../random';
 
 export const DEBREE_W = 0,
              DEBREE_MAX_X = 4,
              DEBREE_ROTATION_SPEED = 7;
 
-export class Debree extends InteractiveSprite
+export class Debree extends Sprite
 {
   constructor (x, y)
   {

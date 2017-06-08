@@ -1,11 +1,11 @@
 
-import { InteractiveSprite } from './interactive-sprite';
+import { Sprite } from './sprite';
 import { WINDOW_HEIGHT } from '../constants';
 
 const FUEL_W = 20,
       FUEL_H = 40;
 
-export class Fuel extends InteractiveSprite
+export class Fuel extends Sprite
 {
   constructor (x)
   {
