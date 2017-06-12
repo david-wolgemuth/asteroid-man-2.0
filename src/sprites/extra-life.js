@@ -1,12 +1,18 @@
 
 import { Sprite } from './sprite';
-import { WINDOW_HEIGHT, PLAYER_W, PLAYER_H } from '../constants';
+import { loadSpriteImages } from '../image-lib';
+
+const WIDTH = 20,
+      HEIGHT = 40;
+
+const image = 'falling-left';
+loadSpriteImages(image, 1);
 
 export class ExtraLife extends Sprite
 {
-  constructor (x)
+  constructor (id, x)
   {
-    super(x, WINDOW_HEIGHT, PLAYER_W, PLAYER_H);
+    super(id, x, WIDTH, HEIGHT, { image });
   }
   render (canvas)
   {

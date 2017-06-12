@@ -1,10 +1,14 @@
 
-import { Player, Asteroid, Coin, Comet, Fuel, Platform, ExtraLife } from './sprites';
+import {
+  Player, Asteroid, Coin, Comet, Fuel, Platform, ExtraLife, Background
+} from './sprites';
 import { getCanvas } from './canvas'; 
-import { randomBool } from './random';
+import { randomBool, randomRange } from './random';
+import { requestAnimationFrame, cancelAnimationFrame } from './animation-frame';
 import { 
-  PLAYER_LAYER, BACKGROUND_LAYER, TEXT_LAYER, OBSTACLE_LAYER, PLATFORM_LAYER,
-  ASTEROID_FREQUENCY, COIN_FREQUENCY, COMET_FREQUENCY, FUEL_FREQUENCY, PLATFORM_FREQUENCY, XLIFE_FREQUENCY
+  PLAYER_LAYER, BACKGROUND_LAYER, TEXT_LAYER, OBSTACLE_LAYER, PLATFORM_LAYER, FLASH_LAYER,
+  ASTEROID_FREQUENCY, COIN_FREQUENCY, COMET_FREQUENCY, FUEL_FREQUENCY, PLATFORM_FREQUENCY, XLIFE_FREQUENCY,
+  WINDOW_WIDTH
 } from './constants';
 
 export class Game
@@ -13,26 +17,42 @@ export class Game
   {
     this.player = new Player();
     this.canvas = getCanvas();
+    this.animationLoop = null;
     this.paused = true;
     this.score = 0;
-    this.layers = [
-      BACKGROUND_LAYER, TEXT_LAYER, PLATFORM_LAYER, OBSTACLE_LAYER, PLAYER_LAYER
-    ].reduce(
-      (layers, layer) => {
-        layers[layer] = [];
-        return layers;
-      },
-    []);
+    this.layers = [];
+    this._nextSpriteId = 1;
+    this._generateDefaultLayers();
+  }
+  run ()
+  {
+    this.update();
+    this.animationLoop = requestAnimationFrame(this.run.bind(this));
+  }
+  stop ()
+  {
+    cancelAnimationFrame(this.animationLoop);
   }
   update ()
   {
     this._generateObstacles();
     this._generatePlatforms();
     this.layers = this.layers.map(this._updateLayer.bind(this));
+    this.render();
   }
   render ()
   {
+    this.canvas.clear();
     this.layers.forEach(this._renderLayer.bind(this));
+  }
+  _generateDefaultLayers ()
+  {
+    [
+      BACKGROUND_LAYER, TEXT_LAYER, PLATFORM_LAYER, OBSTACLE_LAYER, PLAYER_LAYER, FLASH_LAYER
+    ].forEach((layer) => {
+      this.layers[layer] = [];
+    });
+    this.layers[BACKGROUND_LAYER].push(new Background());
   }
   _updateLayer (layer)
   {
@@ -67,14 +87,16 @@ export class Game
       [XLIFE_FREQUENCY, ExtraLife]
     ].forEach(([frequency, Class]) => {
       if (randomBool(frequency)) {
-        this.layers[OBSTACLE_LAYER].push(new Class());
+        let x = randomRange(0, WINDOW_WIDTH);
+        this.layers[OBSTACLE_LAYER].push(new Class(this._nextSpriteId++, x));
       }
     });
   }
   _generatePlatforms ()
   {
     if (randomBool(PLATFORM_FREQUENCY)) {
-      this.layers[PLATFORM_LAYER].push(new Platform());
+      let x = randomRange(0, WINDOW_WIDTH);
+      this.layers[PLATFORM_LAYER].push(new Platform(this._nextSpriteId++, x));
     }
   }
 }

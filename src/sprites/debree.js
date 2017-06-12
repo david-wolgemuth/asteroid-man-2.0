@@ -1,18 +1,18 @@
 
 import { Sprite } from './sprite';
-import { randomRange } from '../random';
+import { randomRange, randomBool } from '../random';
 
-export const DEBREE_W = 0,
+export const DEBREE_W = 8,
              DEBREE_MAX_X = 4,
              DEBREE_ROTATION_SPEED = 7;
 
 export class Debree extends Sprite
 {
-  constructor (x, y)
+  constructor (id, x, y)
   {
-    const width = DEBREE_W / randomRange(5, 10);
-    super(x, y, width, width);
-    this.xVelocity = DEBREE_MAX_X / randomRange(-10, 10);
+    const width = randomRange(8, 18) * 0.1;
+    super(id, x, width, width, { y });
+    this.xVelocity = DEBREE_MAX_X / randomRange(10) * (randomBool(1) ? 1 : -1);
     this.rotation = randomRange(0, 360);
     this.rotationSpeed = DEBREE_ROTATION_SPEED / randomRange(-10, 10);
   }

@@ -4,10 +4,10 @@
 	<title>Asteroid-Man</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui, initial-scale=1, maximum-scale=1, user-scalable=0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<script src="bundle.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<!--
 	<div id="loading-bar-outline">
 		<p>Loading</p><div id="loading-bar"></div>
 	</div>
@@ -22,7 +22,6 @@
 		<h4 id="show-tutorial">Instructions</h4>
 		<h5 id="show-credits">Credits</h5>
 	</div>
-
 	<div id="tutorial" class="start-hidden tutorial">
 		<div id="tut-0" class="tutorial-page">
 			<h2 id="line-1">Avoid</h2>
@@ -71,17 +70,18 @@
 		<p>Creator:</p>
 		<h3>David Wolgemuth</h3>
 		<h1 id="return">Menu</h1>
-	</div>
+	</div>-->
 
-	<canvas id="canvas" width="345" height="500" class="start-hidden"></canvas>
-	<p class="start-hidden">Pause</p>
+	<canvas id="game-canvas" width="345" height="500" class="start-hidden"></canvas>
+	<!--<p class="start-hidden">Pause</p>
 	<div id="ingame-messages">
 		<h2 id="ready" class="ingame-message start-hidden">Ready?</h2>
 		<h2 id="go" class="ingame-message start-hidden">Go!</h2>
 		<h2 id="game-over" class="ingame-message start-hidden">Game Over</h2>
 		<h2 id="play-again" class="ingame-message start-hidden">Play Again</h2>
 		<h2 id="return-main-menu" class="ingame-message start-hidden" style="bottom: 20%;">Main Menu</h2>
-	</div>
+	</div>-->
 	
 </body>
+	<script src="bundle.js"></script>
 </html>

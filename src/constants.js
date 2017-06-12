@@ -2,15 +2,16 @@
 // Screen
 export const WINDOW_WIDTH = 345,
     WINDOW_HEIGHT =  500,
-    RATIO = WIDTH / WINDOW_HEIGHT;
+    RATIO = WINDOW_WIDTH / WINDOW_HEIGHT;
 
 // Layers
 
 export const BACKGROUND_LAYER = 0,
     TEXT_LAYER = 1,
     PLATFORM_LAYER = 2,
-    ITEM_LAYER = 3,
-    PLAYER_LAYER = 4;
+    OBSTACLE_LAYER = 3,
+    PLAYER_LAYER = 4,
+    FLASH_LAYER = 5;
 
 // Player
 export const FALLING_IMAGE_SWITCH = 0.1,

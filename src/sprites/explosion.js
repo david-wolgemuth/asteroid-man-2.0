@@ -3,9 +3,9 @@ import { Sprite } from './sprite';
 
 export class Explosion extends Sprite
 {
-  constructor (x, y, width)
+  constructor (id, x, y, width)
   {
-    super(x, y, width, width);
+    super(id, x, width, width, { y });
   }
   shouldDestroy ()
   {

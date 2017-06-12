@@ -8,3 +8,5 @@ export { ExtraLife } from './extra-life';
 export { Fuel      } from './fuel';
 export { Platform  } from './platform';
 export { Text      } from './text';
+export { Background} from './background';
+export { Player    } from './player';

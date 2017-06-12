@@ -1,15 +1,17 @@
 
 import { Sprite } from './sprite';
-import { WINDOW_HEIGHT } from '../constants';
+import { loadSpriteImages } from '../image-lib';
 
 const FUEL_W = 20,
       FUEL_H = 40;
 
+const image = 'fuel';
+loadSpriteImages(image, 1);
+
 export class Fuel extends Sprite
 {
-  constructor (x)
+  constructor (id, x)
   {
-    super(x, WINDOW_HEIGHT, FUEL_W, FUEL_H);
-    // this.image = fuel image
+    super(id, x, FUEL_W, FUEL_H, { image });
   }
 }
