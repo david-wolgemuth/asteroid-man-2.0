@@ -12,14 +12,13 @@ loadSpriteImages(image, 14);
 
 export class Platform extends Sprite
 {
-  constructor (id, x)
+  constructor (x)
   {
-    super(id, x, PLATFORM_W, randomRange(MIN_PLATFORM_HEIGHT, MAX_PLATFORM_HEIGHT), { image });
+    super(x, PLATFORM_W, randomRange(MIN_PLATFORM_HEIGHT, MAX_PLATFORM_HEIGHT), { image });
     this.imageIndex = randomRange(0, 14);
   }
   update (player, speed)
   {
-    console.log(this.id, this.y);
     super.update(player, speed);
   }
 }

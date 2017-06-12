@@ -16,26 +16,27 @@ loadSpriteImages(image, 1);
 
 export class Asteroid extends Sprite
 {
-  constructor (id, x)
+  constructor (x)
   {
     const width = randomRange(MIN_ASTEROID_R, MAX_ASTEROID_R);
-    super(id, x, width, width, { image });
+    super(x, width, width, { image });
     this.xVelocity = ASTEROID_MAX_X / randomRange(-15, 15);
     this.scoreValue = 1;
     this.rotation = randomRange(0, 360);
     this.rotationSpeed = ASTEROID_ROTATION_SPEED / randomRange(-10, 10);
   }
-  performCollision ()
+  collision ()
   {
     super.collision();
+    this.createExplosion();
     // Sounds.asteroid.random();  TODO
   }
   createExplosion ()
   {
     this.spawns = this.spawns.concat(
-      [new Explosion(this.x, this.y, this.width * 2)]
+      [new Explosion(this.x + (this.width*0.5), this.y + (this.height*0.5), this.width * 3)]
     ).concat(
-      Array(4).map(() => (
+      Array(4).fill(null).map(() => (
         new Debree(this.x, this.y)
       ))
     );

@@ -3,9 +3,9 @@ import { WINDOW_WIDTH, WINDOW_HEIGHT} from '../constants';
 
 export class Flash extends Sprite
 {
-  constructor (id, color)
+  constructor (color)
   {
-    super(id, 0, WINDOW_WIDTH, WINDOW_HEIGHT, { y: 0 });
+    super(0, WINDOW_WIDTH, WINDOW_HEIGHT, { y: 0 });
     this._extend({ color });
   }
   render (canvas)

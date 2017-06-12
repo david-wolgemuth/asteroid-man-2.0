@@ -10,9 +10,9 @@ loadSpriteImages(image, 1);
 
 export class ExtraLife extends Sprite
 {
-  constructor (id, x)
+  constructor (x)
   {
-    super(id, x, WIDTH, HEIGHT, { image });
+    super(x, WIDTH, HEIGHT, { image });
   }
   render (canvas)
   {

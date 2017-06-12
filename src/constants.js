@@ -49,6 +49,8 @@ export const HIT_PLAYER = 'hit-player',
     FUEL_COLLECTED = 'fuel-collected';
 
 export const LEFT = false,
+    COIN_VALUE = 5,
+    FUEL_VALUE = 8,
     RIGHT = true;
 
 
@@ -57,7 +59,7 @@ export const FUEL_FREQUENCY = 400,
     XLIFE_FREQUENCY = 800,
     COIN_FREQUENCY = 80,
     PLATFORM_FREQUENCY = 70,
-    ASTEROID_FREQUENCY = 120,
+    ASTEROID_FREQUENCY = 20,
     COMET_FREQUENCY = 200;
 
 // Maximum Values

@@ -2,11 +2,16 @@
 import { GAME_SPEED, WINDOW_HEIGHT } from '../constants';
 import { getImage } from '../image-lib';
 
+let UUID = 1;
+
 export class Sprite
 {
-  constructor (id, x, width, height, { y=WINDOW_HEIGHT+height, scoreValue=0, mobile=true, image=null, interactive=true, imageCycle=null }={})
+  constructor (x, width, height, { y=WINDOW_HEIGHT+height, scoreValue=0, mobile=true, image=null, interactive=true }={})
   {
-    this.id = id;
+    this._id = UUID++;
+    if (this.constructor.name === 'Debree' || this.constructor.name === 'Explosion') {
+      console.log(this._id, UUID);
+    }
     this.x = x;
     this.y = y;
     this.width = width;
@@ -19,7 +24,6 @@ export class Sprite
 
     this.image = image;
     this.imageIndex = 0;
-    this.imageCycle = imageCycle;
     this.mobile = mobile;
     this.scoreValue = scoreValue;
     this.interactive = interactive;
@@ -36,11 +40,8 @@ export class Sprite
       this.y += this.yVelocity;
     }
     this.rotation += this.rotationSpeed;
-    if (this.imageCycle) {
-      this.imageIndex += this.imageCycle.speed;
-      if (this.imageIndex > this.imageCycle.max) {
-        this.imageIndex = 0;
-      }
+    if (typeof(this.cycleImage) === 'function') {
+      this.cycleImage();
     }
   }
   render (canvas, x=this.x, y=this.y, width=this.width*-0.5, height=this.height*-0.5)
@@ -69,7 +70,10 @@ export class Sprite
   {
     return this.reachedBottom() ? this.scoreValue : 0;
   }
-  collision () { /* To Be Overridden */ }
+  collision ()
+  {
+    // console.log(this.constructor.name, 'ID:', this.id, 'COLLISION');
+  }
   shouldDestroy ()
   {
     return this.reachedBottom();
@@ -80,12 +84,13 @@ export class Sprite
   }
   collidedWithSprite (sprite)
   {
-    return !(
+    return this.interactive && (this !== sprite) && !(
+      // Rectangles Overlapping
       sprite.x > this.x + this.width    ||
       sprite.x + sprite.width < this.x  || 
       sprite.y > this.y + this.height   ||
       sprite.y + sprite.height < this.y
-    ) && (this !== sprite);
+    );
   }
   _extend (object)
   {

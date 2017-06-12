@@ -10,9 +10,16 @@ loadSpriteImages(image, 6);
 
 export class Coin extends Sprite
 {
-  constructor (id, x)
+  constructor (x)
   {
-    super(id, x, COIN_R, COIN_R, { image, imageCycle: { speed: COIN_SPIN_RATE, max: 6 } });
+    super(x, COIN_R, COIN_R, { image });
+  }
+  cycleImage ()
+  {
+    this.imageIndex += COIN_SPIN_RATE;
+    if (this.imageIndex >= 6) {
+      this.imageIndex = 0;
+    }
   }
   update (player, speed)
   {

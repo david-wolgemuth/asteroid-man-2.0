@@ -6,9 +6,9 @@ loadSpriteImages('starfield', 1);
 
 export class Background extends Sprite
 {
-  constructor (id)
+  constructor ()
   {
-    super(id, 0, WINDOW_WIDTH, WINDOW_HEIGHT, { y: 0, mobile: false, interactive: false, image: 'starfield' });
+    super(0, WINDOW_WIDTH, WINDOW_HEIGHT, { y: 0, mobile: false, interactive: false, image: 'starfield' });
   }
   shouldDestroy ()
   {

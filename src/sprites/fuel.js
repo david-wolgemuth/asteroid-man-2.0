@@ -10,8 +10,8 @@ loadSpriteImages(image, 1);
 
 export class Fuel extends Sprite
 {
-  constructor (id, x)
+  constructor (x)
   {
-    super(id, x, FUEL_W, FUEL_H, { image });
+    super(x, FUEL_W, FUEL_H, { image });
   }
 }

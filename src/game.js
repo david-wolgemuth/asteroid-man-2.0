@@ -8,20 +8,20 @@ import { requestAnimationFrame, cancelAnimationFrame } from './animation-frame';
 import { 
   PLAYER_LAYER, BACKGROUND_LAYER, TEXT_LAYER, OBSTACLE_LAYER, PLATFORM_LAYER, FLASH_LAYER,
   ASTEROID_FREQUENCY, COIN_FREQUENCY, COMET_FREQUENCY, FUEL_FREQUENCY, PLATFORM_FREQUENCY, XLIFE_FREQUENCY,
-  WINDOW_WIDTH
+  WINDOW_WIDTH, WINDOW_HEIGHT, COIN_VALUE, FUEL_VALUE
 } from './constants';
 
 export class Game
 {
   constructor ()
   {
-    this.player = new Player();
+    this.player = new Player(WINDOW_WIDTH * 0.5, WINDOW_HEIGHT * 0.2);
     this.canvas = getCanvas();
     this.animationLoop = null;
     this.paused = true;
     this.score = 0;
+    this.fuel  = 18;
     this.layers = [];
-    this._nextSpriteId = 1;
     this._generateDefaultLayers();
   }
   run ()
@@ -53,25 +53,51 @@ export class Game
       this.layers[layer] = [];
     });
     this.layers[BACKGROUND_LAYER].push(new Background());
+    this.layers[PLAYER_LAYER].push(this.player);
   }
   _updateLayer (layer)
   {
-    return layer.reduce(
-      (sprites, sprite) => 
-        this._updateSprite(sprite) ?
-          sprites :
-          sprites.concat([sprite])
-    , []);
+    return layer.reduce((newLayer, sprite) => {  // Use reduce to filter out items, or add spawns
+      const result = this._updateSprite(sprite);
+      if (result instanceof Array) {
+        return newLayer.concat(result);
+      } else if (result) {
+        return newLayer.concat([result]);
+      } else {
+        return newLayer;
+      }
+    }, []);
   }
   _updateSprite (sprite)
   {
     sprite.update();
     this.score += sprite.scoreChange();
-    if (this.player.collidedWithSprite(sprite)) {
-      this.player.collision(sprite);
-      sprite.collision(sprite);
+    if (sprite.collidedWithSprite(this.player)) {
+      return this._handleCollision(sprite);
     }
-    return sprite.shouldDestroy();
+    this.score += sprite.scoreChange();
+    return sprite.shouldDestroy() ? null : sprite;  // Return null if sprite should be destroyed
+  }
+  _handleCollision (sprite)
+  {
+    sprite.collision();
+    switch (sprite.constructor.name) {
+      case 'Coin':
+        this.score += COIN_VALUE;
+        break;
+      case 'Fuel':
+        this.fuel += FUEL_VALUE;
+        break;
+      case 'Asteroid':
+        this.lives -= 1;
+        return sprite.spawns;
+      case 'Comet':
+        this.lives -= 1;
+        return sprite.spawns;
+      default:
+        return sprite;
+    }
+    return null;
   }
   _renderLayer (layer)
   {
@@ -88,7 +114,7 @@ export class Game
     ].forEach(([frequency, Class]) => {
       if (randomBool(frequency)) {
         let x = randomRange(0, WINDOW_WIDTH);
-        this.layers[OBSTACLE_LAYER].push(new Class(this._nextSpriteId++, x));
+        this.layers[OBSTACLE_LAYER].push(new Class(x));
       }
     });
   }
@@ -96,7 +122,7 @@ export class Game
   {
     if (randomBool(PLATFORM_FREQUENCY)) {
       let x = randomRange(0, WINDOW_WIDTH);
-      this.layers[PLATFORM_LAYER].push(new Platform(this._nextSpriteId++, x));
+      this.layers[PLATFORM_LAYER].push(new Platform(x));
     }
   }
 }
