@@ -3,6 +3,7 @@ import { Sprite } from './sprite';
 import { Explosion } from './explosion';
 import { randomBool, randomRange } from '../random';
 import { loadSpriteImages } from '../image-lib';
+import { Flash } from './flash';
 
 const VELOCITY = 0,
       MIN_X_VELOCITY = 3,
@@ -54,6 +55,7 @@ export class Comet extends Sprite
   collision ()
   {
     this.createExplosion();
+    this.spawns.push(new Flash('red'));
   }
   createExplosion ()
   {

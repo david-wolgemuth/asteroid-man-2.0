@@ -1,6 +1,7 @@
 
 import { Sprite } from './sprite';
 import { loadSpriteImages } from '../image-lib';
+import { Flash } from './flash';
 
 export const COIN_R = 25,
       COIN_SPIN_RATE = 0.1;
@@ -21,9 +22,12 @@ export class Coin extends Sprite
       this.imageIndex = 0;
     }
   }
+  collision ()
+  {
+    this.spawns.push(new Flash('gold'));
+  }
   update (player, speed)
   {
-    // this.imageIndex += 1;  COIN_SPIN_RATE ...
     super.update(player, speed);
   }
 }

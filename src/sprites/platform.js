@@ -21,4 +21,8 @@ export class Platform extends Sprite
   {
     super.update(player, speed);
   }
+  render (canvas)
+  {
+    super.render(canvas, this.x, this.y, this.width, this.height);
+  }
 }

@@ -45,6 +45,10 @@ export class Game
     this.canvas.clear();
     this.layers.forEach(this._renderLayer.bind(this));
   }
+  touch ()
+  {
+    this.fuel = this.player.jump(this.layers[PLATFORM_LAYER], this.fuel);
+  }
   _generateDefaultLayers ()
   {
     [
@@ -75,6 +79,9 @@ export class Game
     if (sprite.collidedWithSprite(this.player)) {
       return this._handleCollision(sprite);
     }
+    if (sprite.constructor.name === 'Player') {
+      return [sprite].concat(sprite.spawns);
+    }
     this.score += sprite.scoreChange();
     return sprite.shouldDestroy() ? null : sprite;  // Return null if sprite should be destroyed
   }
@@ -84,20 +91,21 @@ export class Game
     switch (sprite.constructor.name) {
       case 'Coin':
         this.score += COIN_VALUE;
-        break;
+        break;        
       case 'Fuel':
         this.fuel += FUEL_VALUE;
-        break;
+        break;        
       case 'Asteroid':
         this.lives -= 1;
-        return sprite.spawns;
+        break;        
       case 'Comet':
         this.lives -= 1;
-        return sprite.spawns;
-      default:
+        break;        
+      case 'Platform':
+        this.player.platformCollision(sprite);
         return sprite;
     }
-    return null;
+    return sprite.spawns;
   }
   _renderLayer (layer)
   {

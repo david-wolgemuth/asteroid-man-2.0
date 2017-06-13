@@ -1,6 +1,7 @@
 
 import { Sprite } from './sprite';
 import { loadSpriteImages } from '../image-lib';
+import { Flash } from './flash';
 
 const WIDTH = 20,
       HEIGHT = 40;
@@ -17,5 +18,9 @@ export class ExtraLife extends Sprite
   render (canvas)
   {
     super.render(canvas, this.x, this.y, this.width * 1.5, this.height);
+  }
+  collision ()
+  {
+    this.spawns.push(new Flash('lightblue'));
   }
 }

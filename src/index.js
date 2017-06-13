@@ -1,10 +1,13 @@
 
 import { Game } from './game';
+import { CANVAS_ID } from './canvas';
 
-const game = new Game();
-// setTimeout(function() {
+
+document.addEventListener('DOMContentLoaded', () => {
+  const game = new Game();
   game.run();
-  // setTimeout(function() {
-    // game.stop();
-  // });
-// }, 2000);
+
+  const canvas = document.getElementById(CANVAS_ID);
+  canvas.addEventListener('touchstart', game.touch.bind(game));
+  
+});

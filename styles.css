@@ -20,10 +20,13 @@ html, body {
 body { 
 	margin: 0; 
 	padding: 0;
-	background-image: url('images/starfield/0.png');
+	/*background-image: url('images/starfield/0.png');*/
+	background: black;
 	background-size: 100% 100%;
 }
 canvas { 
+	height: 100%;
+	width: auto;
 	display: block; 
 	margin: 0 auto; 
 	background: #fff; 

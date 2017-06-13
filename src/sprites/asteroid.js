@@ -4,6 +4,7 @@ import { Explosion } from './explosion';
 import { loadSpriteImages } from '../image-lib';
 import { Debree } from './debree';
 import { randomRange } from '../random';
+import { Flash } from './flash';
 
 export const ASTEROID_MAX_X = 2,
       ASTEROID_ROTATION_SPEED = 3,
@@ -29,7 +30,7 @@ export class Asteroid extends Sprite
   {
     super.collision();
     this.createExplosion();
-    // Sounds.asteroid.random();  TODO
+    this.spawns.push(new Flash('red'));
   }
   createExplosion ()
   {

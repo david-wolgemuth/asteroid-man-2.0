@@ -9,9 +9,6 @@ export class Sprite
   constructor (x, width, height, { y=WINDOW_HEIGHT+height, scoreValue=0, mobile=true, image=null, interactive=true }={})
   {
     this._id = UUID++;
-    if (this.constructor.name === 'Debree' || this.constructor.name === 'Explosion') {
-      console.log(this._id, UUID);
-    }
     this.x = x;
     this.y = y;
     this.width = width;
@@ -29,13 +26,11 @@ export class Sprite
     this.interactive = interactive;
 
     this.spawns = [];
-
-    // this._canvas = canvas;
   }
-  update (player, speed=GAME_SPEED)
+  update ()
   {
     if (this.mobile) {
-      this.y -= speed;
+      this.y -= GAME_SPEED;
       this.x += this.xVelocity;
       this.y += this.yVelocity;
     }
@@ -44,7 +39,7 @@ export class Sprite
       this.cycleImage();
     }
   }
-  render (canvas, x=this.x, y=this.y, width=this.width*-0.5, height=this.height*-0.5)
+  render (canvas, x=this.x, y=this.y, width=this.width, height=this.height)
   {
     if (isNaN(this.x) || isNaN(this.y) || isNaN(width) || isNaN(height)) {
       console.error(this);
