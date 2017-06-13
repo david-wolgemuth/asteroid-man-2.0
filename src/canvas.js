@@ -1,5 +1,5 @@
 
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants';
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from './window';
 
 export const CANVAS_ID = 'game-canvas';
 

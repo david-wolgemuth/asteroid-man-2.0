@@ -1,5 +1,5 @@
 import { Sprite } from './sprite';
-import { WINDOW_WIDTH, WINDOW_HEIGHT} from '../constants';
+import { WINDOW_WIDTH, WINDOW_HEIGHT} from '../window';
 
 export class Flash extends Sprite
 {

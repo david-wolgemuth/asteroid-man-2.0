@@ -3,7 +3,7 @@ import { Sprite } from './sprite';
 import { loadSpriteImages } from '../image-lib';
 import { Flash } from './flash';
 
-const WIDTH = 20,
+const WIDTH = 30,
       HEIGHT = 40;
 
 const image = 'falling-left';
@@ -17,7 +17,7 @@ export class ExtraLife extends Sprite
   }
   render (canvas)
   {
-    super.render(canvas, this.x, this.y, this.width * 1.5, this.height);
+    super.render(canvas, this.x, this.y, this.width, this.height);
   }
   collision ()
   {

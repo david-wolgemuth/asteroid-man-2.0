@@ -10,3 +10,5 @@ export { Platform  } from './platform';
 export { Text      } from './text';
 export { Background} from './background';
 export { Player    } from './player';
+export { HUD       } from './hud';
+export { Message   } from './message';

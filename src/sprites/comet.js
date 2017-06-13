@@ -28,14 +28,14 @@ export class Comet extends Sprite
     this.yVelocity = VELOCITY;
     this.maxXVelocity = randomRange(MIN_X_VELOCITY, MAX_X_VELOCITY);
   }
-  update (player, speed)
+  update (speed)
   {
+    super.update(speed);
     if (Math.abs(this.xVelocity) >= this.maxXVelocity) {
       this.direction *= -1;
     }
     this.xVelocity += this.direction * X_ACCELERATION;
     this.rotation = 90 + this.xVelocity * this.maxXVelocity;
-    super.update(player, speed);
   }
   cycleImage ()
   {

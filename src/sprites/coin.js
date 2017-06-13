@@ -3,7 +3,7 @@ import { Sprite } from './sprite';
 import { loadSpriteImages } from '../image-lib';
 import { Flash } from './flash';
 
-export const COIN_R = 25,
+const COIN_R = 25,
       COIN_SPIN_RATE = 0.1;
 
 const image = 'coin';
@@ -26,8 +26,8 @@ export class Coin extends Sprite
   {
     this.spawns.push(new Flash('gold'));
   }
-  update (player, speed)
+  update (speed)
   {
-    super.update(player, speed);
+    super.update(speed);
   }
 }

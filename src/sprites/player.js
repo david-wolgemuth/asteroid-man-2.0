@@ -1,7 +1,8 @@
 
 import { Sprite } from './sprite';
 import { loadSpriteImages } from '../image-lib';
-import { WINDOW_WIDTH } from '../constants';
+import { WINDOW_WIDTH } from '../window';
+import { Jetpack } from './jetpack';
 
 const WIDTH = 30,
       HEIGHT = 40,
@@ -54,7 +55,6 @@ export class Player extends Sprite
     for (let platform of platforms) {
       this.x -= JUMP_RANGE;
       if (this.collidedWithSprite(platform)) {
-        console.log('PLATFORM ON LEFT');
         this._jump(JUMP_SPEED);
         return fuel;
       }
@@ -87,9 +87,9 @@ export class Player extends Sprite
       }
     }
   }
-  update ()
+  update (speed)
   {
-    super.update();
+    super.update(speed);
     this.x += this.driftSpeed + this.xVelocity;
     if (this.x > WINDOW_WIDTH) {
       this.x = (this.width*-0.5);
@@ -122,9 +122,15 @@ export class Player extends Sprite
     }
     if (this.image.indexOf('right') > 0) {
       this.xVelocity += JETPACK_SPEED;
+      this._createJetpackSprite(this.x - this.width);
     } else {
       this.xVelocity -= JETPACK_SPEED;
+      this._createJetpackSprite(this.x + this.width);
     }
     return fuel-2;
+  }
+  _createJetpackSprite (x)
+  {
+    this.spawns.push(new Jetpack(x, this.y));
   }
 }

@@ -6,7 +6,7 @@ import { Debree } from './debree';
 import { randomRange } from '../random';
 import { Flash } from './flash';
 
-export const ASTEROID_MAX_X = 2,
+const ASTEROID_MAX_X = 2,
       ASTEROID_ROTATION_SPEED = 3,
       ASTEROID_CUSHION = 0.7,
       MIN_ASTEROID_R = 10,
@@ -34,13 +34,10 @@ export class Asteroid extends Sprite
   }
   createExplosion ()
   {
-    this.spawns = this.spawns.concat(
-      [new Explosion(this.x + (this.width*0.5), this.y + (this.height*0.5), this.width * 3)]
-    ).concat(
-      Array(4).fill(null).map(() => (
-        new Debree(this.x, this.y)
-      ))
-    );
+    this.spawns.push(new Explosion(this.x + (this.width*0.5), this.y + (this.height*0.5), this.width * 3));
+    for (let x = 0; x < 4; x++) {
+      this.spawns.push(new Debree(this.x, this.y));
+    }
   }
   render (canvas)
   {

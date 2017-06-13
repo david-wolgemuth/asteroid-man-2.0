@@ -17,9 +17,9 @@ export class Platform extends Sprite
     super(x, PLATFORM_W, randomRange(MIN_PLATFORM_HEIGHT, MAX_PLATFORM_HEIGHT), { image });
     this.imageIndex = randomRange(0, 14);
   }
-  update (player, speed)
+  update (speed)
   {
-    super.update(player, speed);
+    super.update(speed);
   }
   render (canvas)
   {

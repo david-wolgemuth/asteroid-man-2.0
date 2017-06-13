@@ -1,5 +1,5 @@
 import { Sprite } from './sprite';
-import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../constants';
+import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../window';
 import { loadSpriteImages } from '../image-lib';
 
 loadSpriteImages('starfield', 1);

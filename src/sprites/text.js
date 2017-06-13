@@ -3,9 +3,9 @@ import { Sprite } from './sprite';
 
 export class Text extends Sprite
 {
-  constructor (id, x, y, text, { font='32px Time-N-Space gold', fillStyle='white' }={})
+  constructor (x, y, text, { font='32px Arial', fillStyle='lightgray' }={})
   {
-    super(id, x, { interactive: false });
+    super(x, 120, 120, { interactive: false, y, mobile: false });
     this.font = font;
     this.text = text;
     this.fillStyle = fillStyle;

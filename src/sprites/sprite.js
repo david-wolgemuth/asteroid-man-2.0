@@ -1,5 +1,5 @@
 
-import { GAME_SPEED, WINDOW_HEIGHT } from '../constants';
+import { WINDOW_HEIGHT } from '../window';
 import { getImage } from '../image-lib';
 
 let UUID = 1;
@@ -24,13 +24,15 @@ export class Sprite
     this.mobile = mobile;
     this.scoreValue = scoreValue;
     this.interactive = interactive;
+    this.destroyNextFrame = false;
 
     this.spawns = [];
+    this.children = [];
   }
-  update ()
+  update (speed)
   {
     if (this.mobile) {
-      this.y -= GAME_SPEED;
+      this.y -= speed;
       this.x += this.xVelocity;
       this.y += this.yVelocity;
     }
@@ -60,6 +62,7 @@ export class Sprite
       }
       canvas.restore();
     }
+    this.children.forEach(child => child.render(canvas));
   }
   scoreChange ()
   {
@@ -71,7 +74,7 @@ export class Sprite
   }
   shouldDestroy ()
   {
-    return this.reachedBottom();
+    return this.reachedBottom() || this.destroyNextFrame;
   }
   reachedBottom ()
   {
