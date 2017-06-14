@@ -12,3 +12,4 @@ export { Background} from './background';
 export { Player    } from './player';
 export { HUD       } from './hud';
 export { Message   } from './message';
+export { Star      } from './star';

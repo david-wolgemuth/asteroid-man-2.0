@@ -24,13 +24,14 @@ export class HUD extends Sprite
     this._createLivesDisplay();
     this._createCoinsDisplay();
     this._createStageDisplay();
+    this._createPauseDisplay();
   }
   update (speed=0)
   {
     super.update(speed);
     this.children.forEach(child => child.update(speed));
   }
-  updateValues (canvas, fuel, lives, score, stage)
+  updateValues ({ canvas, fuel, lives, score, stage, paused })
   {
     canvas.font = this.fuelTextSprite.font;
     let x = 0;
@@ -41,6 +42,9 @@ export class HUD extends Sprite
     this._updateCoinsDisplay(x, score);
     x = this.coinTextDisplay.x + canvas.measureText(this.coinTextDisplay.text).width + MARGIN;
     this._updateStageDisplay(x, stage);
+    
+    x = WINDOW_WIDTH - (canvas.measureText('❚❚').width + MARGIN + PADDING);
+    this._updatePauseDisplay(x, paused);
   }
   _createFuelDisplay ()
   {
@@ -85,6 +89,11 @@ export class HUD extends Sprite
     this.stageTextSprite = new Text(0, TEXT_Y_OFFSET + PADDING, '');
     this.children.push(this.stageTextSprite);
   }
+  _createPauseDisplay ()
+  {
+    this.pauseDisplaySprite = new Text(0, TEXT_Y_OFFSET + PADDING, '❚❚');
+    this.children.push(this.pauseDisplaySprite);
+  }
   _updateFuelDisplay(fuel)
   {
     this.fuelTextSprite.text = `x${fuel}`;
@@ -106,5 +115,11 @@ export class HUD extends Sprite
     this.stageDisplaySprite.x = x;
     this.stageTextSprite.x = this.stageDisplaySprite.x + this.stageDisplaySprite.width + MARGIN;
     this.stageTextSprite.text = `${stage}`;
+  }
+  _updatePauseDisplay (x, paused)
+  {
+    const text = paused ? '►' : '❚❚';
+    this.pauseDisplaySprite.x = x;
+    this.pauseDisplaySprite.text = text;
   }
 }
